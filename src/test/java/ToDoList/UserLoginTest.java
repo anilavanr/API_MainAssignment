@@ -19,19 +19,19 @@ import static org.hamcrest.Matchers.*;
 
 public class UserLoginTest extends BaseTest {
 
-    UserRegisterTest registerTest;
+    UserRegisterTest Test_Registration;
 
     {
-        registerTest = new UserRegisterTest();
+        Test_Registration = new UserRegisterTest();
     }
 
     @Test
-    public void user_login(){
+    public void user_registerLogin(){
 
         try (InputStream input = new FileInputStream("src/main/resources/token.properties")) {
 
-            Properties prop = new Properties();
-            prop.load(input);
+            Properties properties = new Properties();
+            properties.load(input);
 
             File json = new File("C:\\Users\\anilavanr\\API_MainAssignment\\src\\test\\java\\utils\\Login.json");
             Response response = given()
@@ -48,7 +48,7 @@ public class UserLoginTest extends BaseTest {
 
 
             String email=obj.get("user.email");
-            String getemail=prop.getProperty("email");
+            String getemail=properties.getProperty("email");
             System.out.println(getemail);
             assertThat(email,is(equalTo(getemail)));
 

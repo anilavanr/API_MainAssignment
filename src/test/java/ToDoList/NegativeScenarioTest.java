@@ -16,7 +16,7 @@ import static io.restassured.RestAssured.given;
 
 public class NegativeScenarioTest extends BaseTest {
     @Test
-    public void negative_register() {
+    public void user_registerNegative() {
 
         File json = new File("C:\\Users\\anilavanr\\API_MainAssignment\\src\\test\\java\\utils\\Negative.json");
         Response response = given()
@@ -26,7 +26,6 @@ public class NegativeScenarioTest extends BaseTest {
                 .then()
                 .extract()
                 .response();
-        // verifyAssertCodeAndType(response , 200);
         String result = response.getBody().asString();
 
         System.out.println(result);
@@ -35,11 +34,11 @@ public class NegativeScenarioTest extends BaseTest {
     }
 
     @Test
-    public void negative_login() {
+    public void user_LoginNegative() {
 
         File json = new File("C:\\Users\\anilavanr\\API_MainAssignment\\src\\test\\java\\utils\\Login.json");
         Response response = given()
-                /*.header("Authorization","Bearer "+set_token())*/
+
                 .body(json)
                 .when()
                 .post("user/login")
@@ -47,22 +46,23 @@ public class NegativeScenarioTest extends BaseTest {
                 .log().body()
                 .extract()
                 .response();
+
         // verifyAssertCodeAndType(response , 200);
 
     }
     @Test
-    public void add_task() throws IOException {
+    public void adding_tasks() throws IOException {
 
-        FileInputStream fis = new FileInputStream("C:\\Users\\anilavanr\\API_MainAssignment\\src\\test\\java\\utils\\Taskoperation.xlsx");
-        XSSFWorkbook wb = new XSSFWorkbook(fis);
+        FileInputStream file = new FileInputStream("C:\\Users\\anilavanr\\API_MainAssignment\\src\\test\\java\\utils\\Taskoperation.xlsx");
+        XSSFWorkbook wb = new XSSFWorkbook(file);
         XSSFSheet ws = wb.getSheetAt(0);
 
         Row dataRow = ws.getRow(1);
         Cell cell = dataRow.getCell(1);
 
-        String task_desc = cell.getStringCellValue();
+        String Taskoperation = cell.getStringCellValue();
         String task = "{\n" +
-                " \"descriptin\":" + task_desc +
+                " \"description\":" + Taskoperation +
                 "\n}";
 
         Response response = given()

@@ -23,16 +23,16 @@ import static org.hamcrest.Matchers.is;
 public class PaginationTest extends BaseTest {
 
     @Test
-    public void paging_limit() {
+    public void limit_pagination() {
 
-        paging_call(2);
-        paging_call(5);
-        paging_call(10);
+        call_pagination(2);
+        call_pagination(5);
+        call_pagination(10);
 
     }
 
     @Test
-    public void paging_call(int i) {
+    public void call_pagination(int i) {
 
         Response response = given()
                 .header("Authorization", "Bearer " + set_token())
@@ -52,12 +52,12 @@ public class PaginationTest extends BaseTest {
 
 
     @Test
-    public void validate_inputs() {
+    public void inputValidation() {
 
         try (InputStream input = new FileInputStream("src/main/resources/token.properties")) {
 
-            Properties prop = new Properties();
-            prop.load(input);
+            Properties properties = new Properties();
+            properties.load(input);
             Response response = given()
                     .header("Authorization", "Bearer " + set_token())
                     .when()
@@ -70,22 +70,22 @@ public class PaginationTest extends BaseTest {
             JSONObject obj = new JSONObject(response.asString());
             JSONArray data = obj.getJSONArray("data");
 
-            FileInputStream fis = new FileInputStream("C:\\Users\\anilavanr\\API_MainAssignment\\src\\test\\java\\JsonFiles\\Taskoperation.xlsx");
+            FileInputStream fis = new FileInputStream("C:\\Users\\anilavanr\\API_MainAssignment\\src\\test\\java\\utils\\Taskoperation.xlsx");
             XSSFWorkbook wb = new XSSFWorkbook(fis);
             XSSFSheet ws = wb.getSheet("Sheet1");
 
 
             for(int i=0;i<data.length();i++){
 
-                assertThat(data.getJSONObject(i).get("owner"),is(equalTo(prop.getProperty("id"))));
+                assertThat(data.getJSONObject(i).get("owner"),is(equalTo(properties.getProperty("id"))));
 
                 for (int count = 1; count <= ws.getLastRowNum(); count++) {
 
                     XSSFRow dataRow = ws.getRow(count);
                     XSSFCell cell = dataRow.getCell(1);
-                    //int task_desc = (int) cell.getNumericCellValue();
-                    String task_desc = cell.getStringCellValue();
-                    assertThat(data.getJSONObject(i).get("description"),is(equalTo(task_desc)));
+
+                    String Taskoperation = cell.getStringCellValue();
+                    assertThat(data.getJSONObject(i).get("description"),is(equalTo(Taskoperation)));
                 }
 
             }

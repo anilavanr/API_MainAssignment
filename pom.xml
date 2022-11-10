@@ -96,17 +96,6 @@
             <version>4.1.2</version>
         </dependency>
 
-
-
-
-
-
-
-
-
-
-
-
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>xml-path</artifactId>
@@ -167,6 +156,18 @@
             <version>0.0.20131108.vaadin1</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.6.2</version>
+            <scope>test</scope>
+        </dependency>
+
+
+
+
 
 
     </dependencies>

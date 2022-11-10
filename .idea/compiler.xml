@@ -16,7 +16,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="API_MainAssignment" options="--add-exports java.base/jdk.internal.foreign.abi.x64=ALL-UNNAMED" />
+      <module name="API_MainAssignment" options="" />
     </option>
   </component>
 </project>

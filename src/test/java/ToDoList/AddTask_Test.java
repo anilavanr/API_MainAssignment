@@ -17,12 +17,11 @@ public class AddTask_Test extends BaseTest {
 
 
     @Test
-    public void add_task() throws IOException {
+    public void adding_tasks() throws IOException {
 
-        FileInputStream fis = new FileInputStream("C:\\Users\\anilavanr\\API_MainAssignment\\src\\test\\java\\TestPackage\\Taskoperation.xlsx");
-        XSSFWorkbook wb = new XSSFWorkbook(fis);
+        FileInputStream File = new FileInputStream("C:\\Users\\anilavanr\\API_MainAssignment\\src\\test\\java\\utils\\Taskoperation.xlsx");
+        XSSFWorkbook wb = new XSSFWorkbook(File);
         XSSFSheet ws = wb.getSheetAt(0);
-
 
 
         for (int count = 1; count <= ws.getLastRowNum(); count++) {
@@ -31,12 +30,12 @@ public class AddTask_Test extends BaseTest {
             Row dataRow = ws.getRow(count);
             Cell cell = dataRow.getCell(1);
 
-            String task_desc = cell.getStringCellValue();
+            String Taskoperation = cell.getStringCellValue();
             String task = "{\n" +
-                    " \"description\":" + task_desc +
+                    " \"description\":" + Taskoperation +
                     "\n}";
             Response response = given()
-                    .header("Authorization", "Bearer "+set_token() )
+                    .header("Authorization", "Bearer " + set_token())
                     .body(task)
                     .when()
                     .post("task")
@@ -45,10 +44,11 @@ public class AddTask_Test extends BaseTest {
                     .extract()
                     .response();
         }
-        //   verifyAssertCodeAndType(response, 201);
+    }
+
+
 
 
     }
 
-}
 
